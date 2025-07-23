@@ -161,3 +161,30 @@
 //    }
 //}
 //
+ this.txtSearch.textProperty().addListener((e) -> {
+            try {
+                BaseQuestionServices s = new KeywordQuestionServicesDecorator(Configs.questionServices, this.txtSearch.getText());
+                this.loadQuestion(s.list());
+            } catch (SQLException ex) {
+                Logger.getLogger(QuestionsController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        });
+        
+        this.cbSearchCates.getSelectionModel().selectedItemProperty().addListener(e -> {
+            try {
+                BaseQuestionServices s = new CategoryQuestionServicesDecorator(Configs.questionServices, this.cbSearchCates.getSelectionModel().getSelectedItem());
+                this.loadQuestion(s.list());
+            } catch (SQLException ex) {
+                Logger.getLogger(QuestionsController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        });
+        
+        this.cbSearchLevels.getSelectionModel().selectedItemProperty().addListener(e -> {
+            try {
+                BaseQuestionServices s = new LevelQuestionServicesDecorator(Configs.questionServices, this.cbSearchLevels.getSelectionModel().getSelectedItem());
+                this.loadQuestion(s.list());
+            } catch (SQLException ex) {
+                Logger.getLogger(QuestionsController.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        });
+    }  
