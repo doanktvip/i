@@ -36,6 +36,12 @@ public class JdbcConnector {
     }
 }
 
+INSERT INTO xe(bienso, idloaixe, mausac, idkhachhang) VALUES(?, ?, ?, ?)
+UPDATE vitri SET trangthai = ? WHERE mavitri = ?
+DELETE FROM question WHERE id=?
+
+
+
 
 public class MyAlert {
     private static MyAlert instance;
