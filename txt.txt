@@ -390,3 +390,39 @@ public class FixedExamStrategy extends ExamStrategy {
     private void loadQuestion(List<Question> questions) {
          this.tbQuestions.setItems(FXCollections.observableList(questions));
     }
+	
+	
+	
+TableColumn thongTin = new TableColumn("Thông tin");
+        thongTin.setPrefWidth(100);
+        thongTin.setCellFactory(b -> new TableCell() {
+            private final Button btn = new Button("Thông tin");
+
+            {
+                btn.setOnAction((var e) -> {
+                    try {
+                        LuotGuiXe luotGuiXe = (LuotGuiXe) getTableView().getItems().get(getIndex());
+                        if (luotGuiXe == null) return;
+                        Xe xe = Configs.xeServices.List().stream().filter(x -> x.getBienSo().equals(luotGuiXe.getBienSo().getBienSo())).findFirst().orElse(null);
+                        LoaiXe loaiXe=listLoaiXe.stream().filter(lx->lx.getId()==xe.getIdLoaiXe().getId()).findFirst().orElse(null);
+                        KhachHang khachHang = Configs.khachHangServices.List().stream().filter(k -> k.getId() == xe.getIdKhachHang().getId()).findFirst().orElse(null);
+                        if (khachHang != null) {
+                            MyAlert.getInstance().showMsg(String.format("Bi?n s? xe: %s\nTên khách hàng: %s\nS? ði?n tho?i: %s\nLo?i xe: %s\nMàu s?c: %s\nTh?i gian vào: %s\nV? trí vào: %s", xe.getBienSo(),
+                                    khachHang.getHoTen(),khachHang.getSoDienThoai(),loaiXe.getTenLoaiXe(),xe.getMauSac(),luotGuiXe.getThoiGianVao().toString(),luotGuiXe.getMaViTri().getMaViTri()));
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ThongTinBaiGuiXeController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Object t, boolean bln) {
+                super.updateItem(t, bln); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+                if (bln || getTableRow() == null || getTableRow().getItem() == null) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btn);
+                }
+            }
+        });
