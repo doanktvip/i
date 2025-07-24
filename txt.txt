@@ -426,3 +426,26 @@ TableColumn thongTin = new TableColumn("Thông tin");
                 }
             }
         });
+		
+.Main {
+    -fx-background-color: lightblue;
+    -fx-padding: 10;
+    -fx-alignment: CENTER;
+    -fx-spacing: 8;
+}
+.Button{
+    -fx-background-color: darkblue;
+    -fx-text-fill: white;
+    -fx-pref-width: 200;
+    -fx-padding: 5;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+.Text_Title{
+    -fx-fill: darkblue;
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+    -fx-font-family: serif;
+    -fx-stroke: lightcyan;
+    -fx-stroke-width: 3;
+}
